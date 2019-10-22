@@ -52,12 +52,16 @@ if(operation === 'concert-this') {
             // console.log(Data);
             console.log('*____________concert-this_____________*');
             console.log('Venue Name: ' + Data.venue.name);
-            console.log('Venue Location: ' + Data.venue.city + ' '  + Data.venue.region + ' ' + Data.venue.country);
+            console.log('Venue Location: ' + Data.venue.city + ', '  + Data.venue.region + ' ' + Data.venue.country);
 
             let concertDate = Data.datetime;
+            let lineup = '';
+            for(let i = 0; i < Data.lineup.length; i++) {
+                lineup += Data.lineup[i] + ' ';
+            }
             concertDate = moment().utc().format('MM/DD/YYYY');
             console.log('Concert Date: ' + concertDate);
-            console.log('Lineup: ' + Data.lineup[0]+ ', ' + Data.lineup[1]+ ', '+ Data.lineup[2]);
+            console.log('Lineup: ' + lineup);
             console.log('*_____________________________________*');
 
             // APPEND THE log.txt FILE WITH THE CONSOLED RESULTS //
@@ -81,7 +85,7 @@ if(operation === 'spotify-this-song') {
     if(!input) {
         input = 'The Sign Ace of Base';
     }
-    spotify.search({ type: 'track', query: input, limit: 1}, function(err, data) {
+    spotify.search({ type: 'track', query: input, limit: 3}, function(err, data) {
         if(err) {
             return console.log('Error occured: ' + err);
         }
