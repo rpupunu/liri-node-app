@@ -5,24 +5,27 @@ var axios = require("axios");
 var Spotify = require("node-spotify-api");
 var keys = require("./key.js");
 var moment = require('moment');
+var fs = require("fs");
 moment().format();
 var spotify = new Spotify(keys.spotify);
 let operation = process.argv[2];
 let input = process.argv[3];
 
 if(operation === 'do-what-it-says') {
-    false.readFile("random.txt", "utf8", function(error, data) {
+
+    fs.readFile("random.txt", "utf8", function(error, data) {
 
         if(error) {
             return console.log(error);
         }
-
+        console.log('*_____________________________________*');
         console.log(data);
+        console.log('*_____________________________________*');
 
         var dataArr = data.split(",");
 
         operation = dataArr[0];
-        input = dataArr[1];
+        input = dataArr[1]; 
         evalOperation();
     });
 }
@@ -37,7 +40,7 @@ if(operation === 'concert-this') {
             let Data = response.data[0];
 
             // console.log(Data);
-
+            console.log('*_____________________________________*');
             console.log('Venue Name: ' + Data.venue.name);
             console.log('Venue Location: ' + Data.venue.city + ' '  + Data.venue.region + ' ' + Data.venue.country);
 
@@ -45,6 +48,7 @@ if(operation === 'concert-this') {
             concertDate = moment().utc().format('MM/DD/YYYY');
             console.log('Concert Date: ' + concertDate);
             console.log('Lineup: ' + Data.lineup[0]+ ', ' + Data.lineup[1]+ ', '+ Data.lineup[2]);
+            console.log('*_____________________________________*');
         }
 )};
 
@@ -66,11 +70,12 @@ if(operation === 'spotify-this-song') {
         for(let i = 0; i < Data.artists.length; i++) {
             artistList += Data.artists[i].name + ' ';
         }
-
+        console.log('*_____________________________________*');
         console.log('Artists: ' + artistList);
         console.log('Song: ' + Data.name);
         console.log('Preview URL: ' + Data.preview_url);
         console.log('Album: ' + Data.album.name);
+        console.log('*_____________________________________*');
 })};
 
 // MOVIE-THIS //
@@ -83,7 +88,9 @@ if(operation === `movie-this`) {
         function(response) {
             let Data = response.data;
             let tomatoScore = '';
-            console.log(Data);
+            // console.log(Data);
+
+            console.log('*_____________________________________*');
             console.log('Title' + Data.Title);
             console.log('Year Released: ' + Data.Year);
             console.log('IMDB Rating: ' + Data.imdbRating);
@@ -98,7 +105,8 @@ if(operation === `movie-this`) {
             console.log('Language of the movie: ' + Data.Language);
             console.log('Movie Plot: ' + Data.Plot);
             console.log('Actors: ' + Data.Actors);
-            
+            console.log('*_____________________________________*');
+
         }
     )
 }
