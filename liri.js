@@ -50,6 +50,10 @@ if(operation === 'concert-this') {
 
 // SPOTIFY-THIS-SONG //
 if(operation === 'spotify-this-song') {
+    // if statement that will default to The Sign Ace of Base if no song is inputted.
+    if(!input) {
+        input = 'The Sign Ace of Base';
+    }
     spotify.search({ type: 'track', query: input, limit: 1}, function(err, data) {
         if(err) {
             return console.log('Error occured: ' + err);
@@ -65,9 +69,12 @@ if(operation === 'spotify-this-song') {
 
         console.log('Artists: ' + artistList);
         console.log('Song: ' + Data.name);
-        console.log('Album: ' + Data.album.name);
         console.log('Preview URL: ' + Data.preview_url);
-    })};
+        console.log('Album: ' + Data.album.name);
+})};
+
+// MOVIE-THIS //
+if
 };
 
 
