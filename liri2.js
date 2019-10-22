@@ -8,9 +8,25 @@ var moment = require('moment');
 var fs = require("fs");
 moment().format();
 var spotify = new Spotify(keys.spotify);
-let operation = process.argv[2];
-let input = process.argv[3];
+var operation = process.argv[2];
+var input = process.argv[3];
 
+switch (operation) {
+case "do-what-it-says":
+    doWhat();
+    break;
+case "concert-this":
+    concertThis();
+    break;
+case "spotify-this-song":
+    spotifyThis();
+    break;
+case "movie-this":
+    movieThis();
+    break;
+}
+
+function doWhat() {
 if(operation === 'do-what-it-says') {
 
     fs.readFile("random.txt", "utf8", function(error, data) {
@@ -27,18 +43,8 @@ if(operation === 'do-what-it-says') {
         operation = dataArr[0];
         input = dataArr[1]; 
         evalOperation();
-
-        // APPEND THE log.txt FILE WITH THE CONSOLED RESULTS //
-        fs.appendFile("log.txt", 
-        "\n*___________do-what-it-says___________*" +
-        "\n" + data +
-        "\n*_____________________________________*", function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        });
-}
+    });
+}}
 
 evalOperation();
 
@@ -50,7 +56,7 @@ if(operation === 'concert-this') {
             let Data = response.data[0];
 
             // console.log(Data);
-            console.log('*____________concert-this_____________*');
+            console.log('*_____________________________________*');
             console.log('Venue Name: ' + Data.venue.name);
             console.log('Venue Location: ' + Data.venue.city + ' '  + Data.venue.region + ' ' + Data.venue.country);
 
@@ -59,19 +65,6 @@ if(operation === 'concert-this') {
             console.log('Concert Date: ' + concertDate);
             console.log('Lineup: ' + Data.lineup[0]+ ', ' + Data.lineup[1]+ ', '+ Data.lineup[2]);
             console.log('*_____________________________________*');
-
-            // APPEND THE log.txt FILE WITH THE CONSOLED RESULTS //
-            fs.appendFile("log.txt", 
-            "\n*____________concert-this_____________*" +
-            "\nVenue Name: " + Data.venue.name +
-            "\nVenue Location: " + Data.venue.name +
-            "\nConcert Date: " + concertDate +
-            "\nLineup: " + Data.lineup[0]+ ', ' + Data.lineup[1]+ ', '+ Data.lineup[2] +
-            "\n*_____________________________________*", function(err) {
-                if (err) {
-                    return console.log(err);
-                }
-            });
         }
 )};
 
@@ -93,25 +86,12 @@ if(operation === 'spotify-this-song') {
         for(let i = 0; i < Data.artists.length; i++) {
             artistList += Data.artists[i].name + ' ';
         }
-        console.log('*__________spotify-this-song__________*');
+        console.log('*_____________________________________*');
         console.log('Artists: ' + artistList);
         console.log('Song: ' + Data.name);
         console.log('Preview URL: ' + Data.preview_url);
         console.log('Album: ' + Data.album.name);
         console.log('*_____________________________________*');
-
-        // APPEND THE log.txt FILE WITH THE CONSOLED RESULTS //
-        fs.appendFile("log.txt", 
-        "\n*__________spotify-this-song__________*" +
-        "\nArtists: " + artistList +
-        "\nSong: " + Data.name +
-        "\nPreviewURL: " + Data.preview_url +
-        "\nAlbum: " + Data.album.name +
-        "\n*_____________________________________*", function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
 })};
 
 // MOVIE-THIS //
@@ -126,7 +106,7 @@ if(operation === `movie-this`) {
             let tomatoScore = '';
             // console.log(Data);
 
-            console.log('*______________movie-this_____________*');
+            console.log('*_____________________________________*');
             console.log('Title' + Data.Title);
             console.log('Year Released: ' + Data.Year);
             console.log('IMDB Rating: ' + Data.imdbRating);
@@ -136,38 +116,26 @@ if(operation === `movie-this`) {
                     tomatoScore = Data.Ratings[i].Value;
                 }
             }
-            console.log('Rotten Tomatoes Rating: ' + tomatoScore);
+            console.log('Rotten Tomotoes Rating: ' + tomatoScore);
             console.log('Country Where Movie Was Produced: ' + Data.Country);
-            console.log('Language of the Movie: ' + Data.Language);
+            console.log('Language of the movie: ' + Data.Language);
             console.log('Movie Plot: ' + Data.Plot);
             console.log('Actors: ' + Data.Actors);
             console.log('*_____________________________________*');
-            // APPEND THE log.txt FILE WITH THE CONSOLED RESULTS //
-            fs.appendFile("log.txt", 
-            "\n*______________movie-this_____________*" +
-            "\nTitle: " + Data.Title +
-            "\nYear Released: " + Data.Year +
-            "\nIMDB Rating: " + Data.imdbRating +
-            "\nRotten Tomatoes Rating: " + tomatoScore +
-            "\nCountry Where Movie Was Produced: " + Data.Country +
-            "\nLanguage of the Movie: " + Data.Language +
-            "\nMovie Plot: " + Data.Plot +
-            "\nActors: " + Data.Actors +
-            "\n*_____________________________________*", function(err) {
-                if (err) {
-                    return console.log(err);
-                }
-            });
 
         }
     )
 }
 };
 
+fs.writeFile("movies.txt", "Inception, Die Hard", function(err) {
 
-
-
-
-
-    
-
+    // If the code experiences any errors it will log the error to the console.
+    if (err) {
+      return console.log(err);
+    }
+  
+    // Otherwise, it will print: "movies.txt was updated!"
+    console.log("movies.txt was updated!");
+  
+  });
