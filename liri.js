@@ -74,7 +74,34 @@ if(operation === 'spotify-this-song') {
 })};
 
 // MOVIE-THIS //
-if
+if(operation === `movie-this`) {
+    if(!input) {
+        input = 'Mr. Nobody';
+    }
+
+    axios.get('http://www.omdbapi.com/?apikey=trilogy&limit=1&t='+input).then(
+        function(response) {
+            let Data = response.data;
+            let tomatoScore = '';
+            console.log(Data);
+            console.log('Title' + Data.Title);
+            console.log('Year Released: ' + Data.Year);
+            console.log('IMDB Rating: ' + Data.imdbRating);
+
+            for(let i = 0; i < Data.Ratings.length; i++) {
+                if(Data.Ratings[i].Source === 'Rotten Tomatoes') {
+                    tomatoScore = Data.Ratings[i].Value;
+                }
+            }
+            console.log('Rotten Tomotoes Rating: ' + tomatoScore);
+            console.log('Country Where Movie Was Produced: ' + Data.Country);
+            console.log('Language of the movie: ' + Data.Language);
+            console.log('Movie Plot: ' + Data.Plot);
+            console.log('Actors: ' + Data.Actors);
+            
+        }
+    )
+}
 };
 
 
