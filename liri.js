@@ -11,6 +11,8 @@ var spotify = new Spotify(keys.spotify);
 let operation = process.argv[2];
 let input = process.argv[3];
 
+//////// DO-WHAT-IT-SAYS //////////
+
 if(operation === 'do-what-it-says') {
 
     fs.readFile("random.txt", "utf8", function(error, data) {
@@ -43,15 +45,18 @@ if(operation === 'do-what-it-says') {
 evalOperation();
 
 function evalOperation() {
-// CONCERT THIS //
+
+////////// CONCERT THIS //////////
 if(operation === 'concert-this') {
     axios.get('https://rest.bandsintown.com/artists/'+input+'/events?app_id=codingbootcamp').then(
         function(response) {
             let Data = response.data[0];
 
             // console.log(Data);
+           
             console.log('*____________concert-this_____________*');
             console.log('Venue Name: ' + Data.venue.name);
+            
             console.log('Venue Location: ' + Data.venue.city + ', '  + Data.venue.region + ' ' + Data.venue.country);
 
             let concertDate = Data.datetime;
@@ -79,7 +84,7 @@ if(operation === 'concert-this') {
         }
 )};
 
-// SPOTIFY-THIS-SONG //
+////////// SPOTIFY-THIS-SONG //////////
 if(operation === 'spotify-this-song') {
     // if statement that will default to The Sign Ace of Base if no song is inputted.
     if(!input) {
@@ -97,6 +102,7 @@ if(operation === 'spotify-this-song') {
         for(let i = 0; i < Data.artists.length; i++) {
             artistList += Data.artists[i].name + ' ';
         }
+        
         console.log('*__________spotify-this-song__________*');
         console.log('Artists: ' + artistList);
         console.log('Song: ' + Data.name);
@@ -118,7 +124,7 @@ if(operation === 'spotify-this-song') {
         });
 })};
 
-// MOVIE-THIS //
+////////// MOVIE-THIS //////////
 if(operation === `movie-this`) {
     if(!input) {
         input = 'Mr. Nobody';
@@ -131,7 +137,7 @@ if(operation === `movie-this`) {
             // console.log(Data);
 
             console.log('*______________movie-this_____________*');
-            console.log('Title' + Data.Title);
+            console.log('Title: ' + Data.Title);
             console.log('Year Released: ' + Data.Year);
             console.log('IMDB Rating: ' + Data.imdbRating);
 
@@ -167,6 +173,15 @@ if(operation === `movie-this`) {
     )
 }
 };
+
+// function outputLog(data) {
+//     fs.appendFile("log.txt", data, function(error) {
+//         if (error) {
+//             return console.log(error);
+//         }
+//     });
+// }
+
 
 
 
