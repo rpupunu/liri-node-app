@@ -60,13 +60,13 @@ if(operation === 'concert-this') {
             console.log('Venue Location: ' + Data.venue.city + ', '  + Data.venue.region + ' ' + Data.venue.country);
 
             let concertDate = Data.datetime;
-            let lineup = '';
-            for(let i = 0; i < Data.lineup.length; i++) {
-                lineup += Data.lineup[i] + ' ';
-            }
+            // let lineup = '';
+            // for(let i = 0; i < Data.lineup.length; i++) {
+            //     lineup += Data.lineup[i] + ' ';
+            // }
             concertDate = moment().utc().format('MM/DD/YYYY');
             console.log('Concert Date: ' + concertDate);
-            console.log('Lineup: ' + lineup);
+            console.log('Lineup: ' + Data.lineup.join(", "));
             console.log('*_____________________________________*');
 
             // APPEND THE log.txt FILE WITH THE CONSOLED RESULTS //

@@ -146,3 +146,25 @@ Language of the Movie: N/A
 Movie Plot: N/A
 Actors: Marco Di Francisca
 *_____________________________________*
+*______________movie-this_____________*
+Title: Anchorman
+Year Released: 2009
+IMDB Rating: 5.8
+Rotten Tomatoes Rating: 
+Country Where Movie Was Produced: Italy
+Language of the Movie: N/A
+Movie Plot: N/A
+Actors: Marco Di Francisca
+*_____________________________________*
+*____________concert-this_____________*
+Venue Name: Amalie Arena
+Venue Location: Amalie Arena
+Concert Date: 10/24/2019
+Lineup: Post Malone, Swae Lee, Tyla Yaweh
+*_____________________________________*
+*____________concert-this_____________*
+Venue Name: Amalie Arena
+Venue Location: Amalie Arena
+Concert Date: 10/24/2019
+Lineup: Post Malone, Swae Lee, Tyla Yaweh
+*_____________________________________*
